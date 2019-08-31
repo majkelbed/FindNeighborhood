@@ -1,0 +1,12 @@
+.search {
+  display: flex;
+  justify-content: space-around;
+
+  padding: 1em;
+
+  border: 1px solid salmon;
+
+  select[class^="search_select"] {
+    border: 3px solid red;
+  }
+}
