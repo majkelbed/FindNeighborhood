@@ -14,22 +14,21 @@ function renderEstates(data) {
 const AllEstates = () => {
   const estates = useContext(EstatesContext)
   const [searchParams, setSearchParams] = useState({})
+
+  const estatesFiltredBySearchParams = estates.filter(
+    ({ street, city }) =>
+      equals(street, searchParams.street) ||
+      (isEmpty(searchParams.street) && equals(city, searchParams.city)) ||
+      isEmpty(searchParams.city)
+  )
+  const estatesToRender = isEmpty(searchParams)
+    ? estates
+    : estatesFiltredBySearchParams
+
   return (
     <>
       <Search passSearchParams={data => setSearchParams(data)} />
-      <StyledGrid>
-        {renderEstates(
-          isEmpty(searchParams)
-            ? estates
-            : estates.filter(
-                ({ street, city }) =>
-                  equals(street, searchParams.street) ||
-                  (isEmpty(searchParams.street) &&
-                    equals(city, searchParams.city)) ||
-                  isEmpty(searchParams.city)
-              )
-        )}
-      </StyledGrid>
+      <StyledGrid>{renderEstates(estatesToRender)}</StyledGrid>
     </>
   )
 }

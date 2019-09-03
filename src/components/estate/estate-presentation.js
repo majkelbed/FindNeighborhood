@@ -6,8 +6,8 @@ const StyledEstate = styled.div`
   align-items: center;
 
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.15);
-  border: none;
   border-radius: ${({ theme }) => theme.borderRadius.primary};
+  border: none;
 
   overflow: hidden;
 `
