@@ -1,6 +1,18 @@
 import React from "react"
-import EstatesProvider from "@context/estatesProvider/estatesProvider"
+import Layout from "@components/layout/layout"
+import EstatesProvider from "@context/estates/estates"
 
-export const wrapRootElement = ({ element }) => {
-  return <EstatesProvider>{element}</EstatesProvider>
+export const wrapPageElement = ({ element }) => {
+  return (
+    <Layout>
+      <EstatesProvider>{element}</EstatesProvider>
+    </Layout>
+  )
 }
+
+/* TODO: for build use wrapRootElement, it is working correctly. On dev it is causing errors with fetching query. 
+
+OR
+
+fetch data once and send it to localStorage
+*/

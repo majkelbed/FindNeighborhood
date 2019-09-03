@@ -5,12 +5,21 @@ export const EstatesContext = createContext({})
 
 const EstatesProvider = ({ children }) => {
   const query = useStaticQuery(graphql`
-    query MyQuery {
+    query estates {
       allContentfulEstate {
         edges {
           node {
-            thumbnailUrl
+            city
             name
+            street
+            thumbnailUrl
+            contentful_id
+            price
+            offertType
+            location {
+              lat
+              lon
+            }
             childContentfulEstateDescriptionRichTextNode {
               json
             }
@@ -21,7 +30,9 @@ const EstatesProvider = ({ children }) => {
   `)
   return (
     <>
-      <EstatesContext.Provider value={query.allContentfulEstate.edges}>
+      <EstatesContext.Provider
+        value={query.allContentfulEstate.edges.map(({ node }) => node)}
+      >
         {children}
       </EstatesContext.Provider>
     </>

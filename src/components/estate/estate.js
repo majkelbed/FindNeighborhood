@@ -1,21 +1,37 @@
 import React from "react"
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { Link } from "gatsby"
 
-import "./estate.scss"
+import { StyledEstate, Info, Cover, Details } from "./estate-presentation"
 
 const Estate = ({
   name = "Estate not found",
-  childContentfulEstateDescriptionRichTextNode: description = "We couldn't find anything, sorry.",
-  thumbnailURL = "NO PHOTO URL",
+  offertType = "Rent",
+  price = "50000",
+  thumbnailUrl = "NO PHOTO URL",
+  city = "",
+  street = "",
+  contentful_id = "redirect",
 }) => {
+  const formatedURL = `/${city}/${street}/${contentful_id}`
+  const displayPrice = `${price}$${offertType === "Rent" ? "/month" : ""}`
+
   return (
-    <div className="estate">
-      <h2 className="estate_name">{name}</h2>
-      <div className="estate_description">
-        {documentToReactComponents(description.json)}
-      </div>
-      <img className="estate_thumbnail" src={thumbnailURL} alt={name} />
-    </div>
+    <StyledEstate className="estate">
+      <Cover
+        className="estate_thumbnail"
+        src={[Math.floor(Math.random() * 9), Math.floor(Math.random() * 9)]} //TODO:Development purpose, later use thumbnailUrl prop
+        alt={name}
+      />
+      <Info>
+        <Link to={formatedURL} className="estate_name">
+          {name}
+        </Link>
+        <Details>
+          {city}, {street}
+        </Details>
+        {displayPrice}
+      </Info>
+    </StyledEstate>
   )
 }
 

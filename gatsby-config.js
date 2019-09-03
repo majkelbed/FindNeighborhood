@@ -1,6 +1,12 @@
 module.exports = {
   plugins: [
-    `gatsby-plugin-sass`,
+    `gatsby-plugin-ramda`,
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        displayName: true,
+      },
+    },
     {
       resolve: `gatsby-source-contentful`,
       options: {
