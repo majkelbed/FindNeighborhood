@@ -4,6 +4,8 @@ const theme = {
     secondary: "#D2D5FF",
     accent: "#9713FF",
     gray: "#707070",
+    white: "#fbfbfb",
+    black: "#333",
   },
   gradients: {
     primary: "linear-gradient(90deg,#515CFF,#6068FF)",

@@ -10,7 +10,15 @@ const StyledEstate = styled.div`
   border: none;
 
   overflow: hidden;
+
+  transform: ${props => (props.isHover ? "scale(1.2)" : "scale(1)")};
 `
+
+const StyledDetails = styled(StyledEstate)`
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+`
+
 const Info = styled.div`
   padding: 1.2em 1em;
 `
@@ -25,12 +33,9 @@ const Cover = styled.div`
   cursor: pointer;
   width: 100%;
   height: 100%;
-  background: gray
-    ${({ src: [a, b] }) =>
-      `url(https://source.unsplash.com/160${a}x90${b}/?kitchen,bedroom,livingroom )`}
-    no-repeat;
+  background: gray ${({ src }) => `url(${src})`} no-repeat;
   background-size: cover;
   background-position: center;
 `
 
-export { StyledEstate, Info, Cover, Details }
+export { StyledEstate, StyledDetails, Info, Cover, Details }

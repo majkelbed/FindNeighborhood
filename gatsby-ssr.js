@@ -1,11 +1,17 @@
 import React from "react"
-import Layout from "@components/layout/layout"
 import EstatesProvider from "@context/estates/estates"
+import SearchParamsProvider from "@context/searchParams/searchParams"
+import HoverEstateProvider from "@context/hoverEstate/hoverEstate"
+// import LocationProvider, { LocationContext } from "@context/location/location"
 
 export const wrapRootElement = ({ element }) => {
-  return <EstatesProvider>{element}</EstatesProvider>
+  return (
+    <HoverEstateProvider>
+      <SearchParamsProvider>{element}</SearchParamsProvider>
+    </HoverEstateProvider>
+  ) //TODO:Uncomment for build
 }
 
 export const wrapPageElement = ({ element }) => {
-  return <Layout>{element}</Layout>
+  return <EstatesProvider>{element}</EstatesProvider>
 }

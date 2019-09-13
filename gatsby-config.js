@@ -2,6 +2,12 @@ module.exports = {
   plugins: [
     `gatsby-plugin-ramda`,
     {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/components/layout/layout.js`),
+      },
+    },
+    {
       resolve: `gatsby-plugin-styled-components`,
       options: {
         displayName: true,
@@ -21,6 +27,7 @@ module.exports = {
           "@components": "src/components",
           "@pages": "src/pages",
           "@context": "src/context",
+          "@img": "src/img",
         },
         extensions: ["js"],
       },

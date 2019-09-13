@@ -40,7 +40,7 @@ exports.createPages = ({ graphql, actions }) => {
           street,
           contentful_id,
           thumbnailUrl,
-          location,
+          location: { lat, lon: lng },
           childContentfulEstateDescriptionRichTextNode: description,
         },
       }) => {
@@ -52,7 +52,8 @@ exports.createPages = ({ graphql, actions }) => {
             city,
             street,
             thumbnailUrl,
-            location,
+            lat,
+            lng,
             description,
           },
         })

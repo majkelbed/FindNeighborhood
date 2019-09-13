@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
 export default Layout
 
 const Global = createGlobalStyle`
-  ${({ theme }) => theme.fonts.import};
+  
 
   * {
     margin: 0;
@@ -29,8 +29,15 @@ const Global = createGlobalStyle`
 
   body {
     font-family: ${({ theme }) => theme.fonts.secondary};
+    overflow-x:hidden;
+    font-size:calc(18px+1vw);
   }
-
+  h1{
+    font-size:5em;
+  }
+  p{
+    font-size:1.4em;
+  }
   h1,
   h2,
   h3,

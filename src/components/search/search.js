@@ -2,34 +2,35 @@ import React, { useContext, useState } from "react"
 import { equals } from "ramda"
 
 import { EstatesContext } from "@context/estates/estates"
+import { SearchParamsContext } from "@context/searchParams/searchParams"
 
 import Select from "./select/select"
-import { Button, Form } from "./search-presentation"
+import { Form } from "./search-presentation"
 import { usePropMapUniqBy, renderPropFromData } from "./search-functions"
 
-const Search = ({ passSearchParams }) => {
+const Search = ({ render = () => {} }) => {
   const estates = useContext(EstatesContext)
-  const [currentCity, setCurrentCity] = useState("")
-  const [currentStreet, setCurrentStreet] = useState("")
+  const [{ city: currCity, street: currStreet }, setParams] = useContext(
+    SearchParamsContext
+  )
   const cityOptions = usePropMapUniqBy(estates, "city", renderPropFromData)
   const streetOptionsBasedOnSelectedCity = usePropMapUniqBy(
-    estates.filter(({ city }) => equals(city, currentCity)), //streets only for current city
+    estates.filter(({ city }) => equals(city, currCity)),
     "street",
     renderPropFromData
   )
   function resetSearchParams() {
-    setCurrentCity("")
-    setCurrentStreet("")
+    setParams({ city: "", street: "" })
   }
 
   function handleSubmit(e) {
     e.preventDefault()
-    passSearchParams({ city: currentCity, street: currentStreet })
+    setParams({ city: currCity, street: currStreet })
   }
 
   function handleReset() {
     resetSearchParams()
-    passSearchParams({ city: "", street: "" })
+    setParams({ city: "", street: "" })
   }
 
   // TODO: Make custom,accesible select dropdowns.
@@ -40,25 +41,23 @@ const Search = ({ passSearchParams }) => {
       className="search"
     >
       <Select
-        state={[currentCity, setCurrentCity]}
+        state={[currCity, value => setParams({ city: value, street: "" })]}
         placeholder="City"
         className="search_select--city"
       >
         {cityOptions}
       </Select>
       <Select
-        state={[currentStreet, setCurrentStreet]}
+        state={[
+          currStreet,
+          value => setParams({ city: currCity, street: value }),
+        ]}
         placeholder="Street"
         className="search_select--street"
       >
         {streetOptionsBasedOnSelectedCity}
       </Select>
-      <Button type="submit" className="search_submit">
-        Find
-      </Button>
-      <Button type="reset" className="search_reset">
-        Clear
-      </Button>
+      {render()}
     </Form>
   )
 }

@@ -33,5 +33,4 @@ const StyledSelect = styled.select`
   margin: 0.25em;
 
   border: none;
-  border-radius: ${({ theme }) => theme.borderRadius.primary};
 `
