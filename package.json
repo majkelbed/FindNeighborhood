@@ -7,7 +7,7 @@
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.4.0",
     "babel-plugin-styled-components": "^1.10.6",
-    "gatsby": "^2.13.73",
+    "gatsby": "^5.9.0",
     "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-layout": "^1.1.7",
     "gatsby-plugin-ramda": "^1.0.0",
